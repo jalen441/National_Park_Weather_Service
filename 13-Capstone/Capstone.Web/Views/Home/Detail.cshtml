@@ -1,22 +1,29 @@
-﻿@model Park;
+﻿@model dynamic;
 @{
     ViewData["Title"] = "Detail";
 }
 
-<img src="~/images/parks/@(Model.ParkCode).jpg" />
+<img src="~/images/parks/@(Model.Park.ParkCode).jpg" />
 
-<h2>@Model.ParkName - @Model.ParkCode</h2>
+<h2>@Model.Park.ParkName - @Model.Park.ParkCode</h2>
 
-<p>@Model.State</p>
-<p>Acreage: @Model.Acreage</p>
-<p>Elevation: @Model.ElevationInFeet <i>ft</i></p>
-<p>Miles of Trail: @Model.MilesOfTrail</p>
-<p>Number of Campsites: @Model.NumberOfCampsites</p>
-<p>Climate: @Model.Climate</p>
-<p>Year Founded: @Model.YearFounded</p>
-<p>Annual Visitor Count: @Model.AnnualVisitorCount</p>
-<blockquote>@Model.InspirationalQuote</blockquote>
-<p> - @Model.InspirationalQuoteSource</p>
-<p>@Model.ParkDescription</p>
-<p>Entry Fee: $@Model.EntryFee</p>
-<p>Animal Species: @Model.NumberOfAnimalSpecies</p>
+<p>@Model.Park.State</p>
+<p>Acreage: @Model.Park.Acreage</p>
+<p>Elevation: @Model.Park.ElevationInFeet <i>ft</i></p>
+<p>Miles of Trail: @Model.Park.MilesOfTrail</p>
+<p>Number of Campsites: @Model.Park.NumberOfCampsites</p>
+<p>Climate: @Model.Park.Climate</p>
+<p>Year Founded: @Model.Park.YearFounded</p>
+<p>Annual Visitor Count: @Model.Park.AnnualVisitorCount</p>
+<blockquote>@Model.Park.InspirationalQuote</blockquote>
+<p> - @Model.Park.InspirationalQuoteSource</p>
+<p>@Model.Park.ParkDescription</p>
+<p>Entry Fee: $@Model.Park.EntryFee</p>
+<p>Animal Species: @Model.Park.NumberOfAnimalSpecies</p>
+<br />
+<br />
+@foreach(Forecast forecast in Model.Forecast)
+{
+    <p>@forecast.High</p>
+    <p>@forecast.Low</p>
+}
