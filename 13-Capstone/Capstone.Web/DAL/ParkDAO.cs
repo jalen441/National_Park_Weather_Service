@@ -62,7 +62,7 @@ namespace Capstone.Web.DAL
         public Park GetParkByParkCode(string parkCode)
         {
             Park park = new Park();
-            string sqlQuery = "SELECT * FROM park";
+            string sqlQuery = "SELECT * FROM park WHERE parkCode = @parkCode";
 
             try
             {
@@ -70,6 +70,7 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(sqlQuery, conn);
+                    cmd.Parameters.AddWithValue("@parkCode", parkCode);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.Read())

@@ -16,9 +16,14 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
-<body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+<body style="padding-top: 0;">
+    <nav class="navbar navbar-inverse" style="background-color:#eee; border: none; margin-bottom: 0;">
+        <div class="banner" style=" width: 100%; height: 205px; display: flex;">
+            <a asp-controller="Home" asp-action="Index">
+                <img src="~/images/logo.png" style="height: 150px; padding-left: 30px; margin-top: 25px;" />
+            </a>
+        </div>
+        <div class="container" style="background-color: #222; width: 100%; padding-left: 50px;">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -26,9 +31,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Capstone.Web</a>
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" style="padding: 0; font-size: 18px;">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Survey" asp-action="Survey">Survey</a></li>
