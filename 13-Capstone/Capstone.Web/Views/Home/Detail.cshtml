@@ -22,8 +22,82 @@
 <p>Animal Species: @Model.Park.NumberOfAnimalSpecies</p>
 <br />
 <br />
-@foreach(Forecast forecast in Model.Forecast)
-{
-    <p>@forecast.High</p>
-    <p>@forecast.Low</p>
-}
+
+<div id="ForecastBox" style="display: grid; grid-template-columns: 1fr 2fr; padding: 20px 0; background-color: #eee;">
+
+    <div id="TodayForecast" style=" text-align: center; vertical-align: central; margin: 0 auto; padding: 0 5px; border: 1px solid black; background-color: white;">
+        <h3>Today</h3>
+        <img src="~/images/weather/@(Model.Forecast[0].ForecastString).png" />
+        <div id="TodayHighLow" style="margin-bottom: 10px;">
+            <span style="padding: 0 10px; font-size: 18px;"><b>High</b> @(Model.Forecast[0].High)</span>
+            <span style="padding: 0 10px; font-size: 18px;"><b>Low</b> @(Model.Forecast[0].Low)</span>
+        </div>
+        <div id="TodayMessages" style="margin-bottom: 10px; padding: 0 10px;">
+            @{
+                if (Model.Forecast[0].ForecastString == "snow")
+                {
+                    <p>Pack Snowshoes</p>
+                }
+                else if (Model.Forecast[0].ForecastString == "rain")
+                {
+                    <p>Pack rain gear and wear waterproof shoes</p>
+                }
+                else if (Model.Forecast[0].ForecastString == "thunderstorms")
+                {
+                    <p>Seek shelter and avoid hiking on exposed ridges</p>
+                }
+                else if (Model.Forecast[0].ForecastString == "sunny")
+                {
+                    <p>Pack sunblock</p>
+                }
+                else if ((Model.Forecast[0].High > 75) || (Model.Forecast[0].Low > 75))
+                {
+                    <p>Bring an extra gallon of water</p>
+                }
+                else if ((Model.Forecast[0].High - Model.Forecast[0].Low) > 20)
+                {
+                    <p>Wear breathable layers</p>
+                }
+                else if ((Model.Forecast[0].High < 20) || (Model.Forecast[0].Low < 20))
+                {
+                    <p>Exposure to frigid temperatures for extended periods can bring about frostbite</p>
+                }
+            }
+        </div>
+    </div>
+    <div id="FutureForecast" style="display: flex;  text-align: center;">
+
+        <div id="Day2Forecast" style="margin:auto 10px; border: 1px solid black; background-color: white; padding-top: 1px;">
+            <img src="~/images/weather/@(Model.Forecast[1].ForecastString).png" style="width:75%;" />
+            <div id="Day2HighLow">
+                <h5><b>High</b> @(Model.Forecast[1].High)</h5>
+                <h5><b>Low</b> @(Model.Forecast[1].Low)</h5>
+            </div>
+        </div>
+
+        <div id="Day3Forecast" style="margin:auto 10px; border: 1px solid black; background-color: white; padding-top: 1px;">
+            <img src="~/images/weather/@(Model.Forecast[2].ForecastString).png" style="width:75%;" />
+            <div id="Day2HighLow">
+                <h5><b>High</b> @(Model.Forecast[2].High)</h5>
+                <h5><b>Low</b> @(Model.Forecast[2].Low)</h5>
+            </div>
+        </div>
+
+        <div id="Day4Forecast" style="margin:auto 10px; border: 1px solid black; background-color: white; padding-top: 1px;">
+            <img src="~/images/weather/@(Model.Forecast[3].ForecastString).png" style="width:75%;" />
+            <div id="Day2HighLow">
+                <h5><b>High</b> @(Model.Forecast[3].High)</h5>
+                <h5><b>Low</b> @(Model.Forecast[3].Low)</h5>
+            </div>
+        </div>
+
+        <div id="Day5Forecast" style="margin:auto 10px; border: 1px solid black; background-color: white; padding-top: 1px;">
+            <img src="~/images/weather/@(Model.Forecast[4].ForecastString).png" style="width:75%;" />
+            <div id="Day2HighLow">
+                <h5><b>High</b> @(Model.Forecast[4].High)</h5>
+                <h5><b>Low</b> @(Model.Forecast[4].Low)</h5>
+            </div>
+        </div>
+
+    </div>
+</div>
