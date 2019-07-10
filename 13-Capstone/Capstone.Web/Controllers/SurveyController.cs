@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Capstone.Web.DAL;
@@ -12,7 +13,7 @@ namespace Capstone.Web.Controllers
     {
         private ISurveyDAO surveyDAO;
 
-        public SurveyController(SurveyDAO surveyDAO)
+        public SurveyController(ISurveyDAO surveyDAO)
         {
             this.surveyDAO = surveyDAO;
         }
@@ -20,20 +21,21 @@ namespace Capstone.Web.Controllers
         [HttpGet]
         public IActionResult Survey()
         {
+            // todo get list of park names for dropdown menu
+            // todo get list of states for dropdown menu
+
             return View();
         }
 
         [HttpPost]
         public IActionResult Survey(Survey survey)
         {
-            int surveyAdded = 0;
-
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Survey");
             }
 
-            surveyAdded = surveyDAO.AddSurvey(survey);
+            int surveyAdded = surveyDAO.AddSurvey(survey);
 
             if (surveyAdded == 1)
             {
