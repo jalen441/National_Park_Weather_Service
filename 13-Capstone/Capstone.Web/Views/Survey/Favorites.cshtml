@@ -4,122 +4,26 @@
     ViewData["Title"] = "Favorites";
 }
 
-<h2>Favorites</h2>
+<h2>Most Popular National Parks</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ParkCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ParkName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.State)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Acreage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ElevationInFeet)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MilesOfTrail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfCampsites)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Climate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.YearFounded)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AnnualVisitorCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InspirationalQuote)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InspirationalQuoteSource)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ParkDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EntryFee)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfAnimalSpecies)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FavoriteCount)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParkCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParkName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.State)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Acreage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ElevationInFeet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MilesOfTrail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfCampsites)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Climate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YearFounded)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AnnualVisitorCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InspirationalQuote)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InspirationalQuoteSource)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParkDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EntryFee)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfAnimalSpecies)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FavoriteCount)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+@if(ViewBag.SurveyStatus == "Complete")
+{
+    <h3 style="background-color:darkgreen; color:white">Thanks for taking the survey. Your vote has been added to the results!</h3>
 }
-    </tbody>
-</table>
+
+@foreach (var item in Model)
+{
+    <div style="display:grid; grid-template-columns: 150px 200px 20px; margin-bottom:15px">
+        <div style="grid-column:1/2">
+            <img style="height:90px;width:auto" src="~/images/parks/@(item.ParkCode).jpg" />
+        </div>
+        <div style="grid-column:2/3">
+            @item.ParkName
+        </div>
+        <div style="grid-column:3/4">
+            Votes: @item.FavoriteCount
+        </div>
+    </div>
+    <hr />
+
+}
