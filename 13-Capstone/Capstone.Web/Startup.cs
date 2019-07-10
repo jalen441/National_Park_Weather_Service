@@ -30,6 +30,15 @@ namespace Capstone.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            // Section A - Enable session for the MVC Application
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                // Sets session expiration to 20 minuates
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
+            });
+            // End Section A
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -49,12 +58,24 @@ namespace Capstone.Web
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            // Section B - Enable session for the MVC Application
+            app.UseSession();
+            // End Section B
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            ConnectionString = Configuration["ConnectionStrings:Default"];
+        }
+
+        public static string ConnectionString
+        {
+            get;
+            private set;
         }
     }
 }
