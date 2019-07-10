@@ -8,7 +8,7 @@ namespace Capstone.Web.DAL
 {
     public interface ISurveyDAO
     {
-        void AddSurvey(Survey survey);
+        int AddSurvey(Survey survey);
 
         List<Park> GetFavorites();
     }
