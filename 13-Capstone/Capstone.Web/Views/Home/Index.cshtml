@@ -1,9 +1,14 @@
-﻿@{
+﻿@model IList<Park>;
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<br />
-<br />
-<div>
-    Yes, this is the index page of the home controller. Who are you?
-</div>
+@foreach(Park park in Model)
+{
+    <div>
+        <img src="~/images/parks/@(park.Code).jpg" />
+        <a asp-action="Detail" asp-route-parkCode="@park.Code" >@park.Name</a>
+        <p>@park.Location</p>
+        <p>@park.Summary</p>
+    </div>
+}
