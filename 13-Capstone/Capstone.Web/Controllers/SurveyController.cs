@@ -7,6 +7,7 @@ using Capstone.Web.DAL;
 using Capstone.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Dynamic;
+using Microsoft.AspNetCore.Http;
 
 namespace Capstone.Web.Controllers
 {
@@ -24,6 +25,9 @@ namespace Capstone.Web.Controllers
         [HttpGet]
         public IActionResult Survey()
         {
+            string surveyStatus = HttpContext.Session.GetString("SurveyStatus");
+
+            ViewBag.SurveyStatus = surveyStatus;
             ViewBag.Parks = parkDAO.GetParks();
             ViewBag.States = states;
 
@@ -42,6 +46,8 @@ namespace Capstone.Web.Controllers
 
             if (surveyAdded == 1)
             {
+                HttpContext.Session.SetString("SurveyStatus", "Complete");
+
                 return RedirectToAction("Favorites");
             }
 
@@ -50,6 +56,11 @@ namespace Capstone.Web.Controllers
 
         public IActionResult Favorites()
         {
+
+            string surveyStatus = HttpContext.Session.GetString("SurveyStatus");
+
+            ViewBag.SurveyStatus = surveyStatus;
+
             List<Park> parks = surveyDAO.GetFavorites();
             
             return View(parks);
