@@ -42,6 +42,7 @@ namespace Capstone.Web
             // End Section A
 
             services.AddTransient<ISurveyDAO>(m => new SurveyDAO(Startup.ConnectionString));
+            services.AddTransient<IParkDAO>(m => new ParkDAO(Startup.ConnectionString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
