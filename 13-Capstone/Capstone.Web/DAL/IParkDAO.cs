@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace Capstone.Web.DAL
 {
-    interface IParkDAO
+    public interface IParkDAO
     {
+
     }
 }

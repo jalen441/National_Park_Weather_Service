@@ -5,12 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Capstone.Web.Models;
+using Capstone.Web.DAL;
 
 namespace Capstone.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IParkDAO dao = new IParkDAO(Startup.ConnectionString);
+        private IParkDAO dao = new ParkDAO(Startup.ConnectionString);
 
         public IActionResult Index()
         {

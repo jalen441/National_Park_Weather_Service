@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace Capstone.Web.DAL
 {
-    interface IWeatherDAO
+    public interface IWeatherDAO
     {
+
     }
 }
