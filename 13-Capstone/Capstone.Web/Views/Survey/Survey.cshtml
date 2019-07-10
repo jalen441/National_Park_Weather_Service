@@ -9,31 +9,58 @@
 <h4>Survey</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Survey" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="ParkCode" class="control-label"></label>
-                <input asp-for="ParkCode" class="form-control" />
+
+            <div class="form-group form-inline">
+                <label class="control-label col-md-2">Favorite national park</label>
+                <select class="form-control">
+                    @foreach (Park park in ViewBag.Parks)
+                    {
+                        <option value="@park.ParkCode">@park.ParkName</option>
+                    }
+                </select>
                 <span asp-validation-for="ParkCode" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="EmailAddress" class="control-label"></label>
-                <input asp-for="EmailAddress" class="form-control" />
+            <div class="form-group form-inline">
+                <label class="control-label col-md-2">Email address</label>
+                <input asp-for="EmailAddress" class="form-control" style="width:300px" />
                 <span asp-validation-for="EmailAddress" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="State" class="control-label"></label>
-                <input asp-for="State" class="form-control" />
+
+            <div class="form-group form-inline">
+                <label class="control-label col-md-2">State of residence</label>
+                <select class="form-control">
+                    @foreach (string state in ViewBag.States)
+                    {
+                        <option value="@state.Substring(0, 2)">@state</option>
+                    }
+
+                </select>
                 <span asp-validation-for="State" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ActivityLevel" class="control-label"></label>
-                <input asp-for="ActivityLevel" class="form-control" />
+            <div class="form-group form-inline">
+                <label class="control-label col-md-2">Activity level</label>
+                <div class="custom-control custom-radio custom-control-inline col-md-2">
+                    <input type="radio" class="custom-control-input" name="extremelyActive" />
+                    <label class="custom-control-label" for="extremelyActive">Extremely Active</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline col-md-2">
+                    <input type="radio" class="custom-control-input" name="active" />
+                    <label class="custom-control-label" for="active">Active</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline col-md-2">
+                    <input type="radio" class="custom-control-input" name="sedentary" />
+                    <label class="custom-control-label" for="sedentary">Sedentary</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline col-md-2">
+                    <input type="radio" class="custom-control-input" name="inactive" />
+                    <label class="custom-control-label" for="inactive">Inactive</label>
+                </div>
                 <span asp-validation-for="ActivityLevel" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            </div><br />
+            <div class="form-group form-inline col-md-12">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>

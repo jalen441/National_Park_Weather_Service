@@ -40,7 +40,7 @@ namespace Capstone.Web.DAL
 
                 conn.Open();
 
-                surveyAdded = cmd.ExecuteNonQuery();
+                surveyAdded = Convert.ToInt32(cmd.ExecuteNonQuery());
             }
 
             return surveyAdded;

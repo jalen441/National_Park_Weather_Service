@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Capstone.Web.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -39,6 +40,9 @@ namespace Capstone.Web
                 options.Cookie.HttpOnly = true;
             });
             // End Section A
+
+            services.AddTransient<ISurveyDAO>(m => new SurveyDAO(Startup.ConnectionString));
+            services.AddTransient<IParkDAO>(m => new ParkDAO(Startup.ConnectionString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
