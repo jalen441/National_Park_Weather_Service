@@ -3,27 +3,106 @@
     ViewData["Title"] = "Detail";
 }
 
-<img src="~/images/parks/@(Model.Park.ParkCode).jpg" />
+<div style="display: flex; margin: 50px 0;">
+    <img src="~/images/parks/@(Model.Park.ParkCode).jpg" id="parkImage" style="width: 66%" />
+    <div id="parkInfo" style="padding: 10px 20px; border: 1px solid black; background-color: white; margin-left: 20px;">
+        <p><span style="font-size:28px;">@Model.Park.ParkName</span></p>
+        <!-- <p>@Model.Park.ParkCode</p>-->
+        <p><b>State:</b> @Model.Park.State</p>
+        <p><b>Acreage:</b> @Model.Park.Acreage</p>
+        <p><b>Elevation:</b> @Model.Park.ElevationInFeet <i>ft</i></p>
+        <p><b>Miles of Trail:</b> @Model.Park.MilesOfTrail</p>
+        <p><b>Number of Campsites:</b> @Model.Park.NumberOfCampsites</p>
+        <p><b>Climate:</b> @Model.Park.Climate</p>
+        <p><b>Year Founded:</b> @Model.Park.YearFounded</p>
+        <p><b>Annual Visitor Count:</b> @Model.Park.AnnualVisitorCount</p>
+        <p><b>Entry Fee:</b> $@Model.Park.EntryFee</p>
+        <p><b>Animal Species:</b> @Model.Park.NumberOfAnimalSpecies</p>
+        <br />
+        <blockquote style="width: 300px; text-align: center; border: none; margin: 0;">@Model.Park.InspirationalQuote</blockquote>
+        <p style="padding-left: 30px;"> - @Model.Park.InspirationalQuoteSource</p>
+    </div>
+</div>
 
-<h2>@Model.Park.ParkName - @Model.Park.ParkCode</h2>
+<p style="font-size: 16px; margin-bottom: 50px;">@Model.Park.ParkDescription</p>
 
-<p>@Model.Park.State</p>
-<p>Acreage: @Model.Park.Acreage</p>
-<p>Elevation: @Model.Park.ElevationInFeet <i>ft</i></p>
-<p>Miles of Trail: @Model.Park.MilesOfTrail</p>
-<p>Number of Campsites: @Model.Park.NumberOfCampsites</p>
-<p>Climate: @Model.Park.Climate</p>
-<p>Year Founded: @Model.Park.YearFounded</p>
-<p>Annual Visitor Count: @Model.Park.AnnualVisitorCount</p>
-<blockquote>@Model.Park.InspirationalQuote</blockquote>
-<p> - @Model.Park.InspirationalQuoteSource</p>
-<p>@Model.Park.ParkDescription</p>
-<p>Entry Fee: $@Model.Park.EntryFee</p>
-<p>Animal Species: @Model.Park.NumberOfAnimalSpecies</p>
-<br />
-<br />
-@foreach(Forecast forecast in Model.Forecast)
-{
-    <p>@forecast.High</p>
-    <p>@forecast.Low</p>
-}
+
+
+<div id="ForecastBox" style="display: grid; grid-template-columns: 1fr 2fr; padding: 20px 0; background-color: #eee;">
+
+    <div id="TodayForecast" style=" text-align: center; vertical-align: central; margin: 0 auto; padding: 0 5px; border: 1px solid black; background-color: white;">
+        <h3>Today</h3>
+        <img src="~/images/weather/@(Model.Forecast[0].ForecastString).png" />
+        <div id="TodayHighLow" style="margin-bottom: 10px;">
+            <span style="padding: 0 10px; font-size: 18px;"><b>High</b> @(Model.Forecast[0].High)</span>
+            <span style="padding: 0 10px; font-size: 18px;"><b>Low</b> @(Model.Forecast[0].Low)</span>
+        </div>
+        <div id="TodayMessages" style="margin-bottom: 10px; padding: 0 10px;">
+            @{
+                if (Model.Forecast[0].ForecastString == "snow")
+                {
+                    <p>Pack Snowshoes</p>
+                }
+                else if (Model.Forecast[0].ForecastString == "rain")
+                {
+                    <p>Pack rain gear and wear waterproof shoes</p>
+                }
+                else if (Model.Forecast[0].ForecastString == "thunderstorms")
+                {
+                    <p>Seek shelter and avoid hiking on exposed ridges</p>
+                }
+                else if (Model.Forecast[0].ForecastString == "sunny")
+                {
+                    <p>Pack sunblock</p>
+                }
+                else if ((Model.Forecast[0].High > 75) || (Model.Forecast[0].Low > 75))
+                {
+                    <p>Bring an extra gallon of water</p>
+                }
+                else if ((Model.Forecast[0].High - Model.Forecast[0].Low) > 20)
+                {
+                    <p>Wear breathable layers</p>
+                }
+                else if ((Model.Forecast[0].High < 20) || (Model.Forecast[0].Low < 20))
+                {
+                    <p>Exposure to frigid temperatures for extended periods can bring about frostbite</p>
+                }
+            }
+        </div>
+    </div>
+    <div id="FutureForecast" style="display: flex;  text-align: center;">
+
+        <div id="Day2Forecast" style="margin:auto 10px; border: 1px solid black; background-color: white; padding-top: 1px;">
+            <img src="~/images/weather/@(Model.Forecast[1].ForecastString).png" style="width:75%;" />
+            <div id="Day2HighLow">
+                <h5><b>High</b> @(Model.Forecast[1].High)</h5>
+                <h5><b>Low</b> @(Model.Forecast[1].Low)</h5>
+            </div>
+        </div>
+
+        <div id="Day3Forecast" style="margin:auto 10px; border: 1px solid black; background-color: white; padding-top: 1px;">
+            <img src="~/images/weather/@(Model.Forecast[2].ForecastString).png" style="width:75%;" />
+            <div id="Day2HighLow">
+                <h5><b>High</b> @(Model.Forecast[2].High)</h5>
+                <h5><b>Low</b> @(Model.Forecast[2].Low)</h5>
+            </div>
+        </div>
+
+        <div id="Day4Forecast" style="margin:auto 10px; border: 1px solid black; background-color: white; padding-top: 1px;">
+            <img src="~/images/weather/@(Model.Forecast[3].ForecastString).png" style="width:75%;" />
+            <div id="Day2HighLow">
+                <h5><b>High</b> @(Model.Forecast[3].High)</h5>
+                <h5><b>Low</b> @(Model.Forecast[3].Low)</h5>
+            </div>
+        </div>
+
+        <div id="Day5Forecast" style="margin:auto 10px; border: 1px solid black; background-color: white; padding-top: 1px;">
+            <img src="~/images/weather/@(Model.Forecast[4].ForecastString).png" style="width:75%;" />
+            <div id="Day2HighLow">
+                <h5><b>High</b> @(Model.Forecast[4].High)</h5>
+                <h5><b>Low</b> @(Model.Forecast[4].Low)</h5>
+            </div>
+        </div>
+
+    </div>
+</div>

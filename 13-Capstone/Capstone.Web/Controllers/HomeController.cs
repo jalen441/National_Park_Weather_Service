@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Capstone.Web.Models;
 using Capstone.Web.DAL;
 using System.Dynamic;
+using Microsoft.AspNetCore.Http;
 
 namespace Capstone.Web.Controllers
 {
@@ -24,10 +25,8 @@ namespace Capstone.Web.Controllers
         public IActionResult Detail(string parkCode)
         {
             dynamic mymodel = new ExpandoObject();
-            IList<Forecast> forecast = forecastDAO.GetWeatherByParkCode(parkCode);
-            Park park = parkDAO.GetParkByParkCode(parkCode);
-            mymodel.Forecast = forecast;
-            mymodel.Park = park;
+            mymodel.Forecast = forecastDAO.GetWeatherByParkCode(parkCode);
+            mymodel.Park = parkDAO.GetParkByParkCode(parkCode);
 
             return View(mymodel);
         }
