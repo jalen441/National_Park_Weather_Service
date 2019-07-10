@@ -19,8 +19,7 @@ namespace Capstone.Web.DAL
         public IList<Park> GetParks()
         {
             IList<Park> parks = new List<Park>();
-
-            string sqlQuery = "";
+            string sqlQuery = "SELECT * FROM park";
 
             try
             {
@@ -33,7 +32,22 @@ namespace Capstone.Web.DAL
                     while (reader.Read())
                     {
                         Park park = new Park();
-                        
+                        park.ParkCode = reader["parkCode"] as string;
+                        park.ParkName = reader["parkName"] as string;
+                        park.State = reader["state"] as string;
+                        park.Acreage = Convert.ToInt32(reader["acreage"]);
+                        park.ElevationInFeet = Convert.ToInt32(reader["elevationInFeet"]);
+                        park.MilesOfTrail = Convert.ToDecimal(reader["milesOfTrail"]);
+                        park.NumberOfCampsites = Convert.ToInt32(reader["numberOfCampsites"]);
+                        park.Climate = reader["climate"] as string;
+                        park.YearFounded = Convert.ToInt32(reader["yearFounded"]);
+                        park.AnnualVisitorCount = Convert.ToInt32(reader["annualVisitorCount"]);
+                        park.InspirationalQuote = reader["inspirationalQuote"] as string;
+                        park.InspirationalQuoteSource = reader["inspirationalQuoteSource"] as string;
+                        park.ParkDescription = reader["parkDescription"] as string;
+                        park.EntryFee = Convert.ToInt32(reader["entryFee"]);
+                        park.NumberOfAnimalSpecies = Convert.ToInt32(reader["numberOfAnimalSpecies"]);
+                        parks.Add(park);
                     }
                 }
             }
@@ -47,7 +61,42 @@ namespace Capstone.Web.DAL
 
         public Park GetParkByParkCode(string parkCode)
         {
-            return null;
+            Park park = new Park();
+            string sqlQuery = "SELECT * FROM park";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(sqlQuery, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        park.ParkCode = reader["parkCode"] as string;
+                        park.ParkName = reader["parkName"] as string;
+                        park.State = reader["state"] as string;
+                        park.Acreage = Convert.ToInt32(reader["acreage"]);
+                        park.ElevationInFeet = Convert.ToInt32(reader["elevationInFeet"]);
+                        park.MilesOfTrail = Convert.ToDecimal(reader["milesOfTrail"]);
+                        park.NumberOfCampsites = Convert.ToInt32(reader["numberOfCampsites"]);
+                        park.Climate = reader["climate"] as string;
+                        park.YearFounded = Convert.ToInt32(reader["yearFounded"]);
+                        park.AnnualVisitorCount = Convert.ToInt32(reader["annualVisitorCount"]);
+                        park.InspirationalQuote = reader["inspirationalQuote"] as string;
+                        park.InspirationalQuoteSource = reader["inspirationalQuoteSource"] as string;
+                        park.ParkDescription = reader["parkDescription"] as string;
+                        park.EntryFee = Convert.ToInt32(reader["entryFee"]);
+                        park.NumberOfAnimalSpecies = Convert.ToInt32(reader["numberOfAnimalSpecies"]);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return park;
         }
     }
 }

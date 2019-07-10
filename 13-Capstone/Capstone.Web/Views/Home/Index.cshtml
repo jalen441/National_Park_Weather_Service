@@ -6,9 +6,9 @@
 @foreach(Park park in Model)
 {
     <div>
-        <img src="~/images/parks/@(park.Code).jpg" />
-        <a asp-action="Detail" asp-route-parkCode="@park.Code" >@park.Name</a>
-        <p>@park.Location</p>
-        <p>@park.Summary</p>
+        <img src="~/images/parks/@(park.ParkCode).jpg" />
+        <a asp-action="Detail" asp-route-parkCode="@park.ParkCode" >@park.ParkName</a>
+        <p>@park.State</p>
+        <p>@park.ParkDescription</p>
     </div>
 }

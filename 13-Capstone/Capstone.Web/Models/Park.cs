@@ -12,7 +12,7 @@ namespace Capstone.Web.Models
         public string State { get; set; }
         public int Acreage { get; set; }
         public int ElevationInFeet { get; set; }
-        public int MilesOfTrail { get; set; }
+        public decimal MilesOfTrail { get; set; }
         public int NumberOfCampsites { get; set; }
         public string Climate { get; set; }
         public int YearFounded { get; set; }
