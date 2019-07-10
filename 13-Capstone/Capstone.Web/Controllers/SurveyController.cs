@@ -26,18 +26,27 @@ namespace Capstone.Web.Controllers
         [HttpPost]
         public IActionResult Survey(Survey survey)
         {
+            int surveyAdded = 0;
+
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Survey");
             }
-            // todo add results to survey table via SurveyDAO
-            return RedirectToAction("Favorites");
+
+            surveyAdded = surveyDAO.AddSurvey(survey);
+
+            if (surveyAdded == 1)
+            {
+                return RedirectToAction("Favorites");
+            }
+
+            return RedirectToAction("Survey");
         }
 
         public IActionResult Favorites()
         {
-            List<Park> parks = new List<Park>();
-            // todo add parks to list based on survey table info via SurveyDAO
+            List<Park> parks = surveyDAO.GetFavorites();
+            
             return View(parks);
         }
     }

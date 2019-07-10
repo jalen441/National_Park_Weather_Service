@@ -1,0 +1,125 @@
+﻿@model IEnumerable<Capstone.Web.Models.Park>
+
+@{
+    ViewData["Title"] = "Favorites";
+}
+
+<h2>Favorites</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.State)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Acreage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ElevationInFeet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MilesOfTrail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfCampsites)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Climate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearFounded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnnualVisitorCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InspirationalQuote)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InspirationalQuoteSource)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EntryFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfAnimalSpecies)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FavoriteCount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Acreage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElevationInFeet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MilesOfTrail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfCampsites)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Climate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearFounded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnnualVisitorCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InspirationalQuote)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InspirationalQuoteSource)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EntryFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfAnimalSpecies)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FavoriteCount)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
