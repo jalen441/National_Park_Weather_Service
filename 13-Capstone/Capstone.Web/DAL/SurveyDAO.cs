@@ -12,13 +12,11 @@ namespace Capstone.Web.DAL
         private string connectionString;
         private string addSurveySql = @"INSERT INTO survey_result(parkCode, emailAddress, state, activityLevel)
                                         VALUES (@parkCode, @emailAddress, @state, @activityLevel)";
-        private string getFavoritesSql = @"SELECT p.parkCode, p.parkName, COUNT(s.parkCode) as favoriteCount
-                                           FROM park p
-                                           JOIN survey_result s
+        private string getFavoritesSql = @"SELECT s.parkCode, p.parkName
+                                           FROM survey_result s
+                                           JOIN park p
                                            ON p.parkCode = s.parkCode
-                                           GROUP BY p.parkName, p.parkCode
-                                           HAVING favoriteCount > = 1
-                                           ORDER BY parkName";
+                                           ORDER BY p.parkName";
 
         public SurveyDAO(string dbConnectionString)
         {
@@ -58,12 +56,14 @@ namespace Capstone.Web.DAL
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
-                while(reader.Read())
+                while (reader.Read())
                 {
                     Park park = MapResultToPark(reader);
 
                     parks.Add(park);
                 }
+
+                parks = GetFavoriteCount(parks);
             }
 
             return parks;
@@ -75,10 +75,47 @@ namespace Capstone.Web.DAL
             {
                 ParkCode = Convert.ToString(reader["parkCode"]),
                 ParkName = Convert.ToString(reader["parkName"]),
-                FavoriteCount = Convert.ToInt32(reader["favoriteCount"])
             };
 
             return park;
+        }
+
+        public List<Park> GetFavoriteCount(List<Park> parks)
+        {
+            List<Park> talliedParks = new List<Park>();
+            HashSet<string> parkCodes = new HashSet<string>();
+            Dictionary<string, int> parkVotes = new Dictionary<string, int>();
+            Dictionary<string, string> parkNames = new Dictionary<string, string>();
+            foreach (Park park in parks)
+            {
+                parkCodes.Add(park.ParkCode);
+            }
+            foreach (string str in parkCodes)
+            {
+                parkVotes[str] = 0;
+            }
+            foreach (Park park in parks)
+            {
+                if (parkCodes.Contains(park.ParkCode))
+                {
+                    parkVotes[park.ParkCode]++;
+                    parkNames[park.ParkCode] = park.ParkName;
+                }
+            }
+
+            foreach(string str in parkCodes)
+            {
+                Park park = new Park
+                {
+                    ParkCode = str,
+                    ParkName = parkNames[str],
+                    FavoriteCount = parkVotes[str]
+                };
+
+                talliedParks.Add(park);
+            }
+
+            return talliedParks;
         }
     }
 }
