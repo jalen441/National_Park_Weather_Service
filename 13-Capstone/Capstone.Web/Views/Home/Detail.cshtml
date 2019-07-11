@@ -29,7 +29,11 @@
 
 
 <div>
-    <span><h3>5-Day Forecast</h3></span><span><h4><a asp-controller="Home" asp-action="ChangeTemperatureUnits" asp-route-unit="F" asp-route-parkCode="@Model.Park.ParkCode">&#176;F</a> / <a asp-action="ChangeTemperatureUnits" asp-route-unit="C" asp-route-parkCode="@Model.Park.ParkCode">&#176;C</a></h4></span>
+    <h3>5-Day Forecast</h3>
+    <h4>
+        <a asp-controller="Home" asp-action="ChangeTemperatureUnits" asp-route-unit="F" asp-route-parkCode="@Model.Park.ParkCode">&#176;F</a> /
+        <a asp-action="ChangeTemperatureUnits" asp-route-unit="C" asp-route-parkCode="@Model.Park.ParkCode">&#176;C</a>
+    </h4>
 </div>
 <div id="ForecastBox" style="display: grid; grid-template-columns: 1fr 2fr; padding: 20px 0; background-color: #eee;">
     <div id="TodayForecast" style=" text-align: center; vertical-align: central; margin: 0 auto; padding: 0 5px; border: 1px solid black; background-color: white;">
@@ -38,13 +42,13 @@
         <div id="TodayHighLow" style="margin-bottom: 10px;">
             @if (ViewBag.TemperatureUnit == "F")
             {
-                <span style="padding: 0 10px; font-size: 18px;"><b>High</b> @(Model.Forecast[0].High)</span>
-                <span style="padding: 0 10px; font-size: 18px;"><b>Low</b> @(Model.Forecast[0].Low)</span>
+                <span style="padding: 0 10px; font-size: 18px;"><b>High</b> @(Model.Forecast[0].High) &#176;F</span>
+                <span style="padding: 0 10px; font-size: 18px;"><b>Low</b> @(Model.Forecast[0].Low) &#176;F</span>
             }
             @if (ViewBag.TemperatureUnit == "C")
             {
-                <span style="padding: 0 10px; font-size: 18px;"><b>High</b> @(((double)(Model.Forecast[0].High - 32) / 1.8).ToString("#.#"))</span>
-                <span style="padding: 0 10px; font-size: 18px;"><b>Low</b> @(((double)(Model.Forecast[0].Low - 32) / 1.8).ToString("#.#"))</span>
+                <span style="padding: 0 10px; font-size: 18px;"><b>High</b> @(((double)(Model.Forecast[0].High - 32) / 1.8).ToString("#.#")) &#176;C</span>
+                <span style="padding: 0 10px; font-size: 18px;"><b>Low</b> @(((double)(Model.Forecast[0].Low - 32) / 1.8).ToString("#.#")) &#176;C</span>
             }
         </div>
         <div id="TodayMessages" style="margin-bottom: 10px; padding: 0 10px;">
@@ -87,13 +91,13 @@
             <div id="Day2HighLow">
                 @if (ViewBag.TemperatureUnit == "F")
                 {
-                    <h5><b>High</b> @(Model.Forecast[1].High)</h5>
-                    <h5><b>Low</b> @(Model.Forecast[1].Low)</h5>
+                    <h5><b>High</b> @(Model.Forecast[1].High) &#176;F</h5>
+                    <h5><b>Low</b> @(Model.Forecast[1].Low) &#176;F</h5>
                 }
                 @if (ViewBag.TemperatureUnit == "C")
                 {
-                    <h5><b>High</b> @(((double)(Model.Forecast[1].High - 32) / 1.8).ToString("#.#"))</h5>
-                    <h5><b>Low</b> @(((double)(Model.Forecast[1].Low - 32) / 1.8).ToString("#.#"))</h5>
+                    <h5><b>High</b> @(((double)(Model.Forecast[1].High - 32) / 1.8).ToString("#.#")) &#176;C</h5>
+                    <h5><b>Low</b> @(((double)(Model.Forecast[1].Low - 32) / 1.8).ToString("#.#")) &#176;C</h5>
                 }
             </div>
         </div>
@@ -103,13 +107,13 @@
             <div id="Day2HighLow">
                 @if (ViewBag.TemperatureUnit == "F")
                 {
-                    <h5><b>High</b> @(Model.Forecast[2].High)</h5>
-                    <h5><b>Low</b> @(Model.Forecast[2].Low)</h5>
+                    <h5><b>High</b> @(Model.Forecast[2].High) &#176;F</h5>
+                    <h5><b>Low</b> @(Model.Forecast[2].Low) &#176;F</h5>
                 }
                 @if (ViewBag.TemperatureUnit == "C")
                 {
-                    <h5><b>High</b> @(((double)(Model.Forecast[2].High - 32) / 1.8).ToString("#.#"))</h5>
-                    <h5><b>Low</b> @(((double)(Model.Forecast[2].Low - 32) / 1.8).ToString("#.#"))</h5>
+                    <h5><b>High</b> @(((double)(Model.Forecast[2].High - 32) / 1.8).ToString("#.#")) &#176;C</h5>
+                    <h5><b>Low</b> @(((double)(Model.Forecast[2].Low - 32) / 1.8).ToString("#.#")) &#176;C</h5>
                 }
             </div>
         </div>
@@ -119,13 +123,13 @@
             <div id="Day2HighLow">
                 @if (ViewBag.TemperatureUnit == "F")
                 {
-                    <h5><b>High</b> @(Model.Forecast[3].High)</h5>
-                    <h5><b>Low</b> @(Model.Forecast[3].Low)</h5>
+                    <h5><b>High</b> @(Model.Forecast[3].High) &#176;F</h5>
+                    <h5><b>Low</b> @(Model.Forecast[3].Low) &#176;F</h5>
                 }
                 @if (ViewBag.TemperatureUnit == "C")
                 {
-                    <h5><b>High</b> @(((double)(Model.Forecast[3].High - 32) / 1.8).ToString("#.#"))</h5>
-                    <h5><b>Low</b> @(((double)(Model.Forecast[3].Low - 32) / 1.8).ToString("#.#"))</h5>
+                    <h5><b>High</b> @(((double)(Model.Forecast[3].High - 32) / 1.8).ToString("#.#")) &#176;C</h5>
+                    <h5><b>Low</b> @(((double)(Model.Forecast[3].Low - 32) / 1.8).ToString("#.#")) &#176;C</h5>
                 }
             </div>
         </div>
@@ -135,13 +139,13 @@
             <div id="Day2HighLow">
                 @if (ViewBag.TemperatureUnit == "F")
                 {
-                    <h5><b>High</b> @(Model.Forecast[4].High)</h5>
-                    <h5><b>Low</b> @(Model.Forecast[4].Low)</h5>
+                    <h5><b>High</b> @(Model.Forecast[4].High) &#176;F</h5>
+                    <h5><b>Low</b> @(Model.Forecast[4].Low) &#176;F</h5>
                 }
                 @if (ViewBag.TemperatureUnit == "C")
                 {
-                    <h5><b>High</b> @(((double)(Model.Forecast[4].High - 32) / 1.8).ToString("#.#"))</h5>
-                    <h5><b>Low</b> @(((double)(Model.Forecast[4].Low - 32) / 1.8).ToString("#.#"))</h5>
+                    <h5><b>High</b> @(((double)(Model.Forecast[4].High - 32) / 1.8).ToString("#.#")) &#176;C</h5>
+                    <h5><b>Low</b> @(((double)(Model.Forecast[4].Low - 32) / 1.8).ToString("#.#")) &#176;C</h5>
                 }
             </div>
         </div>
