@@ -85,15 +85,20 @@ namespace Capstone.Web.DAL
         {
             for(int i = 0; i < parks.Count - 1; i++)
             {
-                if(parks[i].ParkCode == parks[i + 1].ParkCode)
+                if(parks.Count > 1 && parks[i].ParkCode == parks[i + 1].ParkCode)
                 {
                     parks[i].FavoriteCount++;
                     parks.Remove(parks[i + 1]);
                     i--;
                 }
+                else
+                {
+                    return parks;
+                }
+                
             }
 
-            if(parks[parks.Count - 1].ParkCode == parks[parks.Count - 2].ParkCode)
+            if(parks.Count > 1 && parks[parks.Count - 1].ParkCode == parks[parks.Count - 2].ParkCode)
             {
                 parks[parks.Count - 1].FavoriteCount++;
                 parks.Remove(parks[parks.Count - 2]);

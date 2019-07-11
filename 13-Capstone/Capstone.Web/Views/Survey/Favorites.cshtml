@@ -13,18 +13,24 @@
     <h3 style="background-color:darkgreen; color:white">Thanks for taking the survey. Your vote has been added to the results!</h3>
     <br />
 }
-
-@foreach (var item in Model)
+@if (ViewBag.FavoriteParkCount > 0)
 {
-    <div style="display:grid; grid-template-columns: 150px 400px 100px; margin-bottom:15px; align-items: center  ">
-        <div style="grid-column:1/2">
-            <img style="height:90px;width:auto" src="~/images/parks/@(item.ParkCode).jpg" />
+    @foreach (var item in Model)
+    {
+        <div style="display:grid; grid-template-columns: 150px 400px 100px; margin-bottom:15px; align-items: center  ">
+            <div style="grid-column:1/2">
+                <img style="height:90px;width:auto" src="~/images/parks/@(item.ParkCode).jpg" />
+            </div>
+            <div style="grid-column:2/3">
+                <h4><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@item.ParkCode">@item.ParkName</a></h4>
+            </div>
+            <div style="grid-column:3/4">
+                <h4>Votes: @item.FavoriteCount</h4>
+            </div>
         </div>
-        <div style="grid-column:2/3">
-            <h4><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@item.ParkCode">@item.ParkName</a></h4>
-        </div>
-        <div style="grid-column:3/4">
-            <h4>Votes: @item.FavoriteCount</h4>
-        </div>
-    </div>
+    }
+}
+else
+{
+    <h3>Nobody has taken the survey yet. Please head over to the <a asp-action="Survey">survey page</a> and be the first!</h3>
 }

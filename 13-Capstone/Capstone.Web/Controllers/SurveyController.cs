@@ -62,6 +62,7 @@ namespace Capstone.Web.Controllers
             ViewBag.SurveyStatus = surveyStatus;
 
             List<Park> parks = surveyDAO.GetFavorites();
+            ViewBag.FavoriteParkCount = parks.Count();
             
             return View(parks);
         }
