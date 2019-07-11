@@ -22,6 +22,10 @@ namespace Capstone.Web.Controllers
             this.parkDAO = parkDAO;
         }
 
+        /// <summary>
+        /// Empty survey
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Survey()
         {
@@ -34,6 +38,11 @@ namespace Capstone.Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Submits survey data if valid and redirects to Favorites view, otherwise redirects to empty survey
+        /// </summary>
+        /// <param name="survey"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Survey(Survey survey)
         {
@@ -54,9 +63,12 @@ namespace Capstone.Web.Controllers
             return RedirectToAction("Survey");
         }
 
+        /// <summary>
+        /// Acquires list of parks from db and passes to associated view
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Favorites()
         {
-
             string surveyStatus = HttpContext.Session.GetString("SurveyStatus");
 
             ViewBag.SurveyStatus = surveyStatus;
@@ -67,6 +79,9 @@ namespace Capstone.Web.Controllers
             return View(parks);
         }
 
+        /// <summary>
+        /// List of states for use in survey dropdown list
+        /// </summary>
         public List<string> states = new List<string>
         {
                 {"AK - Alaska" },

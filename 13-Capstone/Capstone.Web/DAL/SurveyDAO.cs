@@ -23,6 +23,11 @@ namespace Capstone.Web.DAL
             connectionString = dbConnectionString;
         }
 
+        /// <summary>
+        /// Uses form input to add an entry to the survey_result table
+        /// </summary>
+        /// <param name="survey"></param>
+        /// <returns></returns>
         public int AddSurvey(Survey survey)
         {
             int surveyAdded;
@@ -44,6 +49,10 @@ namespace Capstone.Web.DAL
             return surveyAdded;
         }
 
+        /// <summary>
+        /// Reads the survey_results table and returns a list of parks to be displayed
+        /// </summary>
+        /// <returns></returns>
         public List<Park> GetFavorites()
         {
             List<Park> parks = new List<Park>();
@@ -69,6 +78,11 @@ namespace Capstone.Web.DAL
             return parks;
         }
 
+        /// <summary>
+        /// Maps values from reader to Park object
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
         public Park MapResultToPark(SqlDataReader reader)
         {
             Park park = new Park
@@ -81,23 +95,29 @@ namespace Capstone.Web.DAL
             return park;
         }
 
+        /// <summary>
+        /// Condenses park list to one instance of each park, updates FavoriteCount to the total number of votes per park
+        /// </summary>
+        /// <param name="parks"></param>
+        /// <returns></returns>
         public List<Park> GetFavoriteCount(List<Park> parks)
         {
             for(int i = 0; i < parks.Count - 1; i++)
             {
+                // removes duplicate parks from parks list and updates FavoriteCount if there is more than one element
                 if(parks.Count > 1 && parks[i].ParkCode == parks[i + 1].ParkCode)
                 {
                     parks[i].FavoriteCount++;
                     parks.Remove(parks[i + 1]);
                     i--;
                 }
-                else
+                else // runs if the survey_results table has one or no entries
                 {
                     return parks;
                 }
-                
             }
 
+            // checks last element in parks list if there is more than 1 element
             if(parks.Count > 1 && parks[parks.Count - 1].ParkCode == parks[parks.Count - 2].ParkCode)
             {
                 parks[parks.Count - 1].FavoriteCount++;
