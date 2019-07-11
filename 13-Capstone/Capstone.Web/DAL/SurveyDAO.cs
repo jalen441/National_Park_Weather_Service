@@ -75,6 +75,7 @@ namespace Capstone.Web.DAL
             {
                 ParkCode = Convert.ToString(reader["parkCode"]),
                 ParkName = Convert.ToString(reader["parkName"]),
+                FavoriteCount = 1
             };
 
             return park;
@@ -82,40 +83,23 @@ namespace Capstone.Web.DAL
 
         public List<Park> GetFavoriteCount(List<Park> parks)
         {
-            List<Park> talliedParks = new List<Park>();
-            HashSet<string> parkCodes = new HashSet<string>();
-            Dictionary<string, int> parkVotes = new Dictionary<string, int>();
-            Dictionary<string, string> parkNames = new Dictionary<string, string>();
-            foreach (Park park in parks)
+            for(int i = 0; i < parks.Count - 1; i++)
             {
-                parkCodes.Add(park.ParkCode);
-            }
-            foreach (string str in parkCodes)
-            {
-                parkVotes[str] = 0;
-            }
-            foreach (Park park in parks)
-            {
-                if (parkCodes.Contains(park.ParkCode))
+                if(parks[i].ParkCode == parks[i + 1].ParkCode)
                 {
-                    parkVotes[park.ParkCode]++;
-                    parkNames[park.ParkCode] = park.ParkName;
+                    parks[i].FavoriteCount++;
+                    parks.Remove(parks[i + 1]);
+                    i--;
                 }
             }
 
-            foreach(string str in parkCodes)
+            if(parks[parks.Count - 1].ParkCode == parks[parks.Count - 2].ParkCode)
             {
-                Park park = new Park
-                {
-                    ParkCode = str,
-                    ParkName = parkNames[str],
-                    FavoriteCount = parkVotes[str]
-                };
-
-                talliedParks.Add(park);
+                parks[parks.Count - 1].FavoriteCount++;
+                parks.Remove(parks[parks.Count - 2]);
             }
 
-            return talliedParks;
+            return parks;
         }
     }
 }
