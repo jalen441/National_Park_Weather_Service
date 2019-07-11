@@ -43,7 +43,7 @@ namespace Capstone.Web.Controllers
         {
             HttpContext.Session.SetString("TemperatureUnit", unit);
 
-            return RedirectToAction("Detail", new { parkCode });
+            return RedirectToAction("Detail", "Home", new { parkCode }, "ForecastHeader");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
