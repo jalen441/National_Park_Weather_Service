@@ -17,7 +17,7 @@ namespace Capstone.Web.DAL
                                            JOIN park p
                                            ON p.parkCode = s.parkCode
                                            GROUP BY s.parkCode, p.parkName
-                                           ORDER BY p.parkName";
+                                           ORDER BY faves DESC, p.parkName";
 
         public SurveyDAO(string dbConnectionString)
         {
