@@ -17,15 +17,15 @@
 {
     @foreach (var item in Model)
     {
-        <div style="display:grid; grid-template-columns: 150px 400px 100px; margin-bottom:15px; align-items: center  ">
+        <div style="display:grid; grid-template-columns: 180px 400px 100px; margin-bottom:15px;">
             <div style="grid-column:1/2">
-                <img style="height:90px;width:auto" src="~/images/parks/@(item.ParkCode).jpg" />
+                <img style="height:100px;width:auto; box-shadow: -5px 5px 5px lightgray" src="~/images/parks/@(item.ParkCode).jpg" />
             </div>
             <div style="grid-column:2/3">
-                <h4><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@item.ParkCode">@item.ParkName</a></h4>
+                <h4 style="margin-top:0px"><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@item.ParkCode">@item.ParkName</a></h4>
             </div>
             <div style="grid-column:3/4">
-                <h4>Votes: @item.FavoriteCount</h4>
+                <h4 style="margin-top:0px">Votes: @item.FavoriteCount</h4>
             </div>
         </div>
     }
