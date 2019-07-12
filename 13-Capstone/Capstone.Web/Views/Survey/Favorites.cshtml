@@ -6,26 +6,38 @@
 
 <h2>Most Popular National Parks</h2>
 <br />
-<br />
 
 @if (ViewBag.SurveyStatus == "Complete")
 {
     <h3 style="background-color:darkgreen; color:white; text-align: center; margin: 0 100px;">Thanks for taking the survey. Your vote has been added to the results!</h3>
+    <br />
     <br />
 }
 @if (ViewBag.FavoriteParkCount > 0)
 {
     @foreach (var item in Model)
     {
-        <div style="display:grid; grid-template-columns: 180px 400px 100px; margin-bottom:15px;">
-            <div style="grid-column:1/2">
-                <img style="height:100px;width:auto; box-shadow: -5px 5px 5px lightgray" src="~/images/parks/@(item.ParkCode).jpg" />
+        <div style="display:grid; grid-template-columns: 190px 400px; margin-bottom:15px; align-items: center">
+            <div style="grid-column:1/2;">
+                <img style="height:111.6px;width:auto; box-shadow: -5px 5px 5px lightgray" src="~/images/parks/@(item.ParkCode).jpg" />
             </div>
-            <div style="grid-column:2/3">
-                <h4 style="margin-top:0px"><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@item.ParkCode">@item.ParkName</a></h4>
-            </div>
-            <div style="grid-column:3/4">
-                <h4 style="margin-top:0px">Votes: @item.FavoriteCount</h4>
+            <div style="display:grid; border: 1px solid black; background-color: white; padding: 0 10px; box-shadow: -5px 5px 5px lightgray">
+                <div style="grid-row:1/2">
+                    <h4><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@item.ParkCode">@item.ParkName</a></h4>
+                </div>
+                <div style="grid-row:2/3">
+                    <h5>A @((item.Climate).ToLower()) park in the state of @item.State.</h5>
+                </div>
+                <div style="grid-row:3/4">
+                    @if (item.FavoriteCount > 1)
+                    {
+                        <p><span style="font-size:125%; font-weight:700">@item.FavoriteCount</span> vistors chose this as their favorite national park!</p>
+                    }
+                    else
+                    {
+                        <p><span style="font-size:125%; font-weight:700">@item.FavoriteCount</span> vistor chose this as their favorite national park!</p>
+                    }
+                </div>
             </div>
         </div>
     }
