@@ -48,6 +48,8 @@ namespace Capstone.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
+                HttpContext.Session.SetString("SurveyStatus", "Partial");
+
                 return RedirectToAction("Survey");
             }
 
