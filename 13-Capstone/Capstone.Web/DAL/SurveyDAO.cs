@@ -12,11 +12,11 @@ namespace Capstone.Web.DAL
         private string connectionString;
         private string addSurveySql = @"INSERT INTO survey_result(parkCode, emailAddress, state, activityLevel)
                                         VALUES (@parkCode, @emailAddress, @state, @activityLevel)";
-        private string getFavoritesSql = @"SELECT s.parkCode, p.parkName, COUNT(*) AS faves
+        private string getFavoritesSql = @"SELECT s.parkCode, p.parkName, p.state, p.climate, COUNT(*) AS faves
                                            FROM survey_result s
                                            JOIN park p
                                            ON p.parkCode = s.parkCode
-                                           GROUP BY s.parkCode, p.parkName
+                                           GROUP BY s.parkCode, p.parkName, p.state, p.climate
                                            ORDER BY faves DESC, p.parkName";
 
         public SurveyDAO(string dbConnectionString)
@@ -88,6 +88,8 @@ namespace Capstone.Web.DAL
             {
                 ParkCode = Convert.ToString(reader["parkCode"]),
                 ParkName = Convert.ToString(reader["parkName"]),
+                State = Convert.ToString(reader["state"]),
+                Climate = Convert.ToString(reader["climate"]),
                 FavoriteCount = Convert.ToInt32(reader["faves"])
             };
 

@@ -6,7 +6,7 @@
     @foreach (Park park in Model)
     {
         <div style="display: flex; margin: 50px 0;">
-            <img src="~/images/parks/@(park.ParkCode).jpg" style="width: 400px;" />
+            <img src="~/images/parks/@(park.ParkCode).jpg" style="width: 400px; box-shadow: -5px 5px 5px lightgray" />
             <div style="padding-left: 50px;">
                 <a asp-action="Detail" asp-route-parkCode="@park.ParkCode" style="font-size:28px;">@park.ParkName</a>
                 <p>@park.State</p>

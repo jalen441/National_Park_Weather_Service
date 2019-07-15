@@ -15,7 +15,7 @@
 
 @if (ViewBag.SurveyStatus == "Complete")
 {
-    <h3 style="background-color:darkblue; color:white; text-align: center; margin: 0 100px;">You have already completed the survey. <a asp-action="Favorites">Click here</a> to check out the results!</h3>
+    <h3 style="background-color:darkred; color:white; text-align: center; margin: 0 100px;">You have already completed the survey. <a asp-action="Favorites">Click here</a> to check out the results!</h3>
     <br />
 }
 else
@@ -23,6 +23,13 @@ else
     <h4>Please help us improve our visitor services by taking this quick survey!</h4>
     <h4>Just let us know which National Park is your favorite, along with a little</h4>
     <h4>information about yourself. After you're done, you can see which parks everyone likes the most!</h4>
+    
+
+    @if (ViewBag.SurveyStatus == "Partial")
+    {
+        <span class="text-danger">Your entry was missing one or more required fields. Please try again.</span>
+    }
+
     <br /><br />
 
     <div class="row">
@@ -75,6 +82,10 @@ else
                         <input type="radio" class="custom-control-input" name="ActivityLevel" value="inactive" id="inactive" />
                         <label class="custom-control-label" for="inactive">Inactive</label>
                     </div>
+                    @if (ViewBag.SurveyStatus == "Partial")
+                    {
+                        <span class="text-danger">Please select an activity level.</span>
+                    }
                     <span asp-validation-for="ActivityLevel" class="text-danger"></span>
                 </div><br /><br /><br />
                 <div class="form-group form-inline col-md-12">
